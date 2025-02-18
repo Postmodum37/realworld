@@ -1,4 +1,5 @@
-import { Text, View } from 'react-native'
+import View from 'react-native-ui-lib/view'
+import Text from 'react-native-ui-lib/text'
 
 export default function FavoriteScreen() {
   return (
