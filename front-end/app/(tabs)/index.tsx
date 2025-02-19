@@ -1,14 +1,14 @@
 import React from 'react'
 import View from 'react-native-ui-lib/view'
 import { StyleSheet } from 'react-native'
-import PostsList from '@/components/PostsList'
 
-import testData from '@/constants/Posts'
+import ArticlesList from '@/components/ArticlesList'
+import articles from '@/constants/Articles'
 
 export default function Index() {
   return (
     <View style={styles.container}>
-      <PostsList posts={testData.posts} />
+      <ArticlesList articles={articles} />
     </View>
   )
 }

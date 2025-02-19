@@ -9,16 +9,18 @@ import {
 import Text from 'react-native-ui-lib/text'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { Link } from 'expo-router'
-import testData from '@/constants/Posts'
+import { Article } from '@/types'
+import { PLACEHOLDER_AVATAR } from '@/constants/Articles'
 
-type Post = (typeof testData.posts)[0]
-
-export default function PostsList({ posts }: { posts: Post[] }) {
-  const renderPost = ({ item }: { item: Post }) => (
-    <Link href={`/post/${item.id}`} asChild>
-      <TouchableOpacity style={styles.postContainer}>
+export default function ArticlesList({ articles }: { articles: Article[] }) {
+  const renderArticle = ({ item }: { item: Article }) => (
+    <Link href={`/article/${item.id}`} asChild>
+      <TouchableOpacity style={styles.articleContainer}>
         <View style={styles.authorContainer}>
-          <Image source={{ uri: item.author.avatar }} style={styles.avatar} />
+          <Image
+            source={{ uri: item.author.image || PLACEHOLDER_AVATAR }}
+            style={styles.avatar}
+          />
           <View style={styles.authorInfo}>
             <Text style={styles.authorName}>{item.author.username}</Text>
             <Text style={styles.date}>
@@ -43,8 +45,8 @@ export default function PostsList({ posts }: { posts: Post[] }) {
 
   return (
     <FlatList
-      data={posts}
-      renderItem={renderPost}
+      data={articles}
+      renderItem={renderArticle}
       keyExtractor={(item) => item.id}
       showsVerticalScrollIndicator={false}
     />
@@ -52,7 +54,7 @@ export default function PostsList({ posts }: { posts: Post[] }) {
 }
 
 const styles = StyleSheet.create({
-  postContainer: {
+  articleContainer: {
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#E5E5E5',

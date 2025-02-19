@@ -1,4 +1,3 @@
-// app/blog/[id].tsx
 import { useLocalSearchParams, Stack } from 'expo-router'
 import {
   View,
@@ -10,21 +9,19 @@ import {
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
-import testData from '@/constants/Posts'
+import articles, { PLACEHOLDER_AVATAR } from '@/constants/Articles'
 
-export default function PostScreen() {
+export default function ArticleScreen() {
   const { id } = useLocalSearchParams()
-  // You'll need to fetch the post data using the id
-  // For now, let's assume you have access to the posts data
-  const post = testData.posts.find((p) => p.id === id)
+  const article = articles.find((a) => a.id === id)
 
-  if (!post) return <Text>Post not found</Text>
+  if (!article) return <Text>Article not found</Text>
 
   return (
     <>
       <Stack.Screen
         options={{
-          title: post.title,
+          title: article.title,
           headerStyle: {
             backgroundColor: '#2E7FB8',
           },
@@ -33,24 +30,27 @@ export default function PostScreen() {
       />
       <ScrollView style={styles.container}>
         <View style={styles.authorContainer}>
-          <Image source={{ uri: post.author.avatar }} style={styles.avatar} />
+          <Image
+            source={{ uri: article.author.image || PLACEHOLDER_AVATAR }}
+            style={styles.avatar}
+          />
           <View style={styles.authorInfo}>
-            <Text style={styles.authorName}>{post.author.username}</Text>
-            <Text style={styles.date}>{post.createdAt}</Text>
+            <Text style={styles.authorName}>{article.author.username}</Text>
+            <Text style={styles.date}>{article.createdAt}</Text>
           </View>
           <TouchableOpacity style={styles.likeButton}>
             <Ionicons
-              name={post.liked ? 'heart' : 'heart-outline'}
+              name={article.favorited ? 'heart' : 'heart-outline'}
               size={24}
-              color={post.liked ? '#FF2D55' : '#666'}
+              color={article.favorited ? '#FF2D55' : '#666'}
             />
           </TouchableOpacity>
         </View>
 
-        <Text style={styles.title}>{post.title}</Text>
-        <Text style={styles.description}>{post.description}</Text>
+        <Text style={styles.title}>{article.title}</Text>
+        <Text style={styles.description}>{article.description}</Text>
         <Text style={styles.fullContent}>
-          {post.fullContent || 'Full article content goes here...'}
+          {article.body || 'Full article content goes here...'}
         </Text>
       </ScrollView>
     </>
