@@ -1,6 +1,6 @@
-import View from 'react-native-ui-lib/view'
-import Text from 'react-native-ui-lib/text'
-import { StyleSheet } from 'react-native'
+// import View from 'react-native-ui-lib/view'
+// import Text from 'react-native-ui-lib/text'
+import { StyleSheet, View, Text } from 'react-native'
 
 export default function FavoriteScreen() {
   return (

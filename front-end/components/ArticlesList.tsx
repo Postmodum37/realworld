@@ -5,14 +5,18 @@ import {
   Image,
   StyleSheet,
   View,
+  useColorScheme,
 } from 'react-native'
 import Text from 'react-native-ui-lib/text'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { Link } from 'expo-router'
 import { Article } from '@/types'
 import { PLACEHOLDER_AVATAR } from '@/constants/Articles'
+import { Colors } from '@/constants/Colors'
 
 export default function ArticlesList({ articles }: { articles: Article[] }) {
+  const colorScheme = useColorScheme()
+
   const renderArticle = ({ item }: { item: Article }) => (
     <Link href={`/article/${item.id}`} asChild>
       <TouchableOpacity style={styles.articleContainer}>
@@ -34,7 +38,11 @@ export default function ArticlesList({ articles }: { articles: Article[] }) {
             </Text>
           </View>
           <TouchableOpacity style={styles.likeButton}>
-            <Ionicons name='heart' size={24} color='#666' />
+            <Ionicons
+              name={item.favorited ? 'heart' : 'heart-outline'}
+              size={24}
+              color={Colors[colorScheme || 'light'].tint}
+            />
           </TouchableOpacity>
         </View>
         <Text style={styles.title}>{item.title}</Text>
