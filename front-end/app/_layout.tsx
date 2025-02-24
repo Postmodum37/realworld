@@ -11,6 +11,8 @@ export default function RootLayout() {
         />
         <Stack.Screen name='post/[id]' options={{ headerShown: true }} />
         <Stack.Screen name='+not-found' />
+        <Stack.Screen name='login' />
+        <Stack.Screen name='register' />
       </Stack>
       <StatusBar style='light' />
     </>
